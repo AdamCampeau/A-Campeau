@@ -1,65 +1,52 @@
-import React, { useEffect, useState } from ';
-import about from './components/profile/about'
-import navigation from './components/profile/navigation.js';
-import footer from './components/profile/footer.js';
-import contact from './components/profile/contact.js';
-import projects from './components/profile/projects.js';
+import "./app.css";
+import Contact from "./components/contact";
+import Footer from "./components/footer";
+import Home from "./components/home";
+import Nav from "./components/nav";
+import Portfolio from "./components/portfolio";
+import Resume from "./components/resume";
 
-
-import './index.css'
-import './App.css';
-
-function displayPage({ thePage }) {
-
-  if (thePage === '/') {
-    return <about />;
-
-  }
-  if (thePage === 'about') {
-    return <about />;
-  }
-  if (thePage === 'projects') {
-    return <projects />;
-  }
-
-  if (thePage === 'contact') {
-    return <contactForm />;
-  }
-
-  return null;
-}
-
-function App() {
-
-  const [thePage, setPage] = useState(null);
-  useEffect(function () {
-    const splitUrl = window.location.href.split("/")
-    if (splitUrl[splitUrl.length - 1] === '#home') {
-      setPage('Home');
-    }
-    if (splitUrl[splitUrl.length - 1] === '#about') {
-      setPage('About');
-    }
-    if (splitUrl[splitUrl.length - 1] === '#portfolio') {
-      setPage('Portfolio');
-    }
-    if (splitUrl[splitUrl.length - 1] === '#contact') {
-      setPage('Contact');
-    }
-  }, []
-
-
-  )
- 
-  const handlePageChange = (page) => setPage(page);
+function app() {
+  const about = {
+    marginLeft: 0,
+  };
 
   return (
-    <div>
-      <Navigation thePage={thePage} handlePageChange={handlePageChange} />
-      <RenderPage thePage={thePage} />
-      <Footer></Footer>
-    </div>
+    <section id="main">
+      <section id="navBar">
+        <Nav></Nav>
+      </section>
+
+      <section id="contact" className="section">
+        <div id="contactTab" className="tab"></div>
+        <div id="contactLine" className="line"></div>
+        <Contact></Contact>
+      </section>
+
+      <section id="resume" className="section">
+        <div id="resumeTab" className="tab"></div>
+        <div id="resumeLine" className="line"></div>
+
+        <Resume></Resume>
+      </section>
+
+      <section id="portfolio" className="section">
+        <div id="portfolioTab" className="tab"></div>
+        <div id="portfolioLine" className="line"></div>
+        <Portfolio></Portfolio>
+      </section>
+
+      <section id="about" className="section" style={about}>
+        <div id="aboutTab" className="tab"></div>
+        <div id="aboutLine" className="line"></div>
+        <Home></Home>
+      </section>
+
+      <section id="footer">
+        <Footer></Footer>
+      </section>
+    </section>
   );
 }
 
-export default App;
+export default app;
